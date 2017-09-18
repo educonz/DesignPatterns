@@ -42,14 +42,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Criacao\AbstractFactory.cs" />
+    <Compile Include="Criacao\Builder.cs" />
+    <Compile Include="Criacao\FactoryMethod.cs" />
     <Compile Include="Criacao\ObjectPool.cs" />
     <Compile Include="Criacao\Prototype.cs" />
     <Compile Include="Criacao\Singleton.cs" />
+    <Compile Include="Estrutural\Adapter.cs" />
+    <Compile Include="Estrutural\Bridge.cs" />
+    <Compile Include="Estrutural\Composite.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

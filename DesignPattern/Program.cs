@@ -1,4 +1,5 @@
 ﻿using DesignPattern.Criacao;
+using DesignPattern.Estrutural;
 using System;
 
 namespace DesignPattern
@@ -7,44 +8,91 @@ namespace DesignPattern
     {
         public static void Main(string[] args)
         {
+            //BuilderTest();
+            //FactoryTest();
+            //AbstractFactoryTest();
             //SingletonTest();
-            ObjectPoolTest();
             //PrototypeTest();
+
+            //AdapterTest();
+            CompositeTest();
         }
 
-        public static void ObjectPoolTest()
+        private static void CompositeTest()
         {
-            var controleDeLances = new LanceLeilaoControleInstancia(2);
-
-            var usuario1 = controleDeLances.ObterInstancia();
-            usuario1.Usuario = "USUARIO1";
-            usuario1.Lance = 100;
-
-            Console.WriteLine($"{usuario1.Usuario} - {usuario1.Lance}");
-
-            var usuario2 = controleDeLances.ObterInstancia();
-            usuario2.Usuario = "USUARIO2";
-            usuario2.Lance = 200;
-
-            Console.WriteLine($"{usuario2.Usuario} - {usuario2.Lance}");
-
-
-            try
+            var rota = new Rota()
             {
-                var usuario3 = controleDeLances.ObterInstancia();
-                usuario3.Usuario = "USUARIO3";
-                usuario3.Lance = 300;
+                Origem = "Blumenau",
+                Destino = "Maringá"
+            };
 
-                Console.WriteLine($"{usuario3.Usuario} - {usuario3.Lance}");
-            }
-            catch (Exception ex)
+            rota.AdicionarPontoParada(new PontoParada
             {
-                Console.WriteLine(ex.Message);
-            }
+                Origem = "Blumenau",
+                Destino = "Curitiba"
+            });
 
+            rota.AdicionarPontoParada(new PontoParada
+            {
+                Origem = "Curitiba",
+                Destino = "Ortigueira"
+            });
+
+            rota.AdicionarPontoParada(new PontoParada
+            {
+                Origem = "Ortigueira",
+                Destino = "Maringá"
+            });
+
+            Console.WriteLine(rota.ObterRota());
             Console.ReadKey();
+        }
 
+        private static void AdapterTest()
+        {
+            Console.WriteLine($"Cenerário anterior");
+            var portaCom = new PortaCOM();
+            Console.WriteLine($"{portaCom.ConectarComCOM()}");
 
+            Console.WriteLine($"Cenerário novo: o dispositivo só aceita usb");
+            var adapterCom = new PortaCOMAdapterUSB(new PortaCOM());
+            Console.WriteLine($"{adapterCom.ConectarComUSB()}");
+            Console.ReadKey();
+        }
+
+        public static void BuilderTest()
+        {
+            var time = new TimeDevelopmentSoftwareBuilder(new Coordenacao { Nome = "Thays" }, new Time { Nome = "Procurement" });
+            time.AdicionarPO(new PO { Nome = "Andressa" })
+                .AdicionarPO(new PO { Nome = "Mainha" })
+                .AdicionarSM(new SM { Nome = "Ronaldo brilha muito no Corinthians" })
+                .AdicionarSM(new SM { Nome = "Pradelicia das indias" })
+                .AdicionarDev(new Dev { Nome = "Conz" })
+                .AdicionarDev(new Dev { Nome = "Matheus" });
+
+            Console.WriteLine(time.ToString());
+            Console.ReadKey();
+        }
+
+        public static void FactoryTest()
+        {
+            var portalCreator = new ProcurementPortalCreatorFactory();
+
+            Console.WriteLine(portalCreator.ObterPortal(TipoPortalProcurement.Insumos).Descricao);
+            Console.WriteLine(portalCreator.MeVeInstanciaPortalPagamentos().Descricao);
+            Console.ReadKey();
+        }
+
+        public static void AbstractFactoryTest()
+        {
+            var hbControleDeTime = new HBSISControleTimeAbstractFactory();
+
+            var centroCustoProcurement = hbControleDeTime.ConsultarCentroCustoPorTime(new TimeProcuremntFactory());
+            var centroCustoWMS = hbControleDeTime.ConsultarCentroCustoPorTime(new TimeWMSFactory());
+
+            Console.WriteLine($"{centroCustoProcurement.Descricao} - PASSIVO: {centroCustoProcurement.TotalPassivo}");
+            Console.WriteLine($"{centroCustoWMS.Descricao} - PASSIVO: {centroCustoWMS.TotalPassivo}");
+            Console.ReadKey();
         }
 
         public static void SingletonTest()
