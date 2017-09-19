@@ -51,6 +51,9 @@
     <Compile Include="Estrutural\Adapter.cs" />
     <Compile Include="Estrutural\Bridge.cs" />
     <Compile Include="Estrutural\Composite.cs" />
+    <Compile Include="Estrutural\Decorator.cs" />
+    <Compile Include="Estrutural\Facade.cs" />
+    <Compile Include="Estrutural\Proxy.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
