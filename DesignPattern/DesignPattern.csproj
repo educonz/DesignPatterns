@@ -42,6 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comportamental\Command.cs" />
+    <Compile Include="Comportamental\Iterator.cs" />
+    <Compile Include="Comportamental\Mediator.cs" />
+    <Compile Include="Comportamental\Observer.cs" />
+    <Compile Include="Comportamental\State.cs" />
+    <Compile Include="Comportamental\Strategy.cs" />
     <Compile Include="Criacao\AbstractFactory.cs" />
     <Compile Include="Criacao\Builder.cs" />
     <Compile Include="Criacao\FactoryMethod.cs" />
@@ -53,6 +59,7 @@
     <Compile Include="Estrutural\Composite.cs" />
     <Compile Include="Estrutural\Decorator.cs" />
     <Compile Include="Estrutural\Facade.cs" />
+    <Compile Include="Estrutural\FlyWeight.cs" />
     <Compile Include="Estrutural\Proxy.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

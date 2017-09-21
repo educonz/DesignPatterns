@@ -1,4 +1,5 @@
-﻿using DesignPattern.Criacao;
+﻿using DesignPattern.Comportamental;
+using DesignPattern.Criacao;
 using DesignPattern.Estrutural;
 using System;
 
@@ -15,7 +16,56 @@ namespace DesignPattern
             //PrototypeTest();
 
             //AdapterTest();
-            CompositeTest();
+            //CompositeTest();
+            //FlyWeightTest();
+
+            //ObserverTest();
+            //MediatorTest();
+            StateTest();
+        }
+
+        private static void StateTest()
+        {
+            var contextoSessao = new ContextoSessao();
+
+            new SessaoIniciada().Acao(contextoSessao);
+            Console.WriteLine(contextoSessao.EstadoSessao.ToString());
+
+            new SessaoConcluida().Acao(contextoSessao);
+            Console.WriteLine(contextoSessao.EstadoSessao.ToString());
+            Console.ReadKey();
+
+        }
+
+        private static void MediatorTest()
+        {
+            new Usuario() { Nome = "Conz" }.EnviarMensagem("Olá");
+            new Usuario() { Nome = "Aline" }.EnviarMensagem("Aqui!");
+            new Usuario() { Nome = "Prado" }.EnviarMensagem("Pradelicia!");
+            Console.ReadKey();
+        }
+
+        private static void FlyWeightTest()
+        {
+            var coordenada1 = ItinerariosFactory.GetCoordenadas("Blumenau");
+            var coordenada2 = ItinerariosFactory.GetCoordenadas("Maringá");
+            var coordenada3 = ItinerariosFactory.GetCoordenadas("Blumenau");
+
+            Console.WriteLine($"coordenada1 => {coordenada1.ToString()}");
+            Console.WriteLine($"coordenada2 => {coordenada2.ToString()}");
+            Console.WriteLine($"coordenada3 => {coordenada3.ToString()}");
+            Console.ReadKey();
+        }
+
+        private static void ObserverTest()
+        {
+            var salaLeilao = new SalaLeilao();
+
+            salaLeilao.AlterarLance += new LanceObserver { Lance = 100 }.AlteracaoLance;
+            salaLeilao.AlterarLance += new LanceObserver { Lance = 1500 }.AlteracaoLance;
+            salaLeilao.AlterarLance += new LanceObserver { Lance = 500 }.AlteracaoLance;
+
+            salaLeilao.Notificar();
         }
 
         private static void CompositeTest()
